@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run app",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python ${workspaceFolder}/main.py",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Format (black + isort)",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python -m black ${workspaceFolder} && ${workspaceFolder}/.venv/bin/python -m isort ${workspaceFolder}"
+        },
+        {
+            "label": "Lint (flake8)",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/flake8 ${workspaceFolder}"
+        },
+        {
+            "label": "Test (pytest)",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/pytest -q"
+        }
+    ]
+}

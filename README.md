@@ -105,3 +105,10 @@ In this step your goal is to support being able to read from standard input if n
 
 If it doesn’t, check your code, fix any bugs and try again. If it does, congratulations! You’ve done it, pat yourself on the back, job well done!
 
+
+## How to Run It
+
+```bash
+source .venv/bin/activate
+python main.py
+```
