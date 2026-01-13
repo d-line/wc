@@ -15,9 +15,27 @@ def count_bytes(filename):
         sys.exit(1)
 
 
+def count_lines(filename):
+    """Count the number of lines in a file."""
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            return sum(1 for _ in f)
+    except FileNotFoundError:
+        print(f"ccwc: {filename}: No such file or directory", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"ccwc: Error reading {filename}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
 def main():
     parser = argparse.ArgumentParser(prog="ccwc", description="Count bytes in files")
-    parser.add_argument("-c", "--bytes", action="store_true", help="Count bytes")
+    parser.add_argument(
+        "-c", "--bytes", action="store_true", default=False, help="Count bytes"
+    )
+    parser.add_argument(
+        "-l", "--lines", action="store_true", default=False, help="Count lines"
+    )
     parser.add_argument("files", nargs="+", help="File(s) to process")
 
     args = parser.parse_args()
@@ -26,8 +44,12 @@ def main():
         for filename in args.files:
             byte_count = count_bytes(filename)
             print(f"{byte_count} {filename}")
+    elif args.lines:
+        for filename in args.files:
+            line_count = count_lines(filename)
+            print(f"{line_count} {filename}")
     else:
-        print("Usage: ccwc -c <filename>", file=sys.stderr)
+        print("Usage: ccwc [-c|-l] <filename>", file=sys.stderr)
         sys.exit(1)
 
 
